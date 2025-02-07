@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="{% static 'app/track.js' %}"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        #locationdata, #targetlocationdata, #misc, #status {
+            color: #555;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Agent-1 Dashboard</h2>
+
+        <h4 id="misc">Agent's location : <span id="locationdata">(Latitude, Longitude)</span></h4>
+        <h4 id="misc">Target location : <span id="targetlocationdata">(Latitude, Longitude)</span></h4>
+        <h4 id="status">distance <br><br>Status</h4>
+
+    </div>
+
+    
+</body>
+</html>

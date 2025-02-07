@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Records</title>
+    <!-- <script src="{% static 'app/track.js' %}"></script> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            border-left: 6px solid #007bff;
+        }
+        .card-content {
+            flex: 1;
+        }
+        .track-id {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .meta {
+            font-size: 14px;
+            color: #555;
+            margin: 2px 0;
+        }
+        .status {
+            font-weight: bold;
+            color: green;
+        }
+        .status.false {
+            color: red;
+        }
+        .date {
+            font-size: 13px;
+            color: #777;
+            margin-top: 5px;
+        }
+    </style>
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Records</h2>
+        {% for track in tracks %}
+        <div class="card">
+            <div class="card-content">
+                <div class="track-id">Track ID: {{ track.track_ID }}</div>
+                <div class="meta"> Agent: <strong>{{ track.agentt }}</strong></div>
+                <div class="meta"> Dealer: <strong>{{ track.dealerr }}</strong></div>
+
+                <div class="meta"> Destination: <strong>
+                    {% for info in targetInfo %}
+                        {% if info.dealer_name == track.dealerr.dealer_name %}
+                            {{info.dealer_info}}
+                        {% endif %}
+                    {% endfor %}
+                </strong></div>
+
+                <div class="meta"> Destination Coordinates: <strong>
+                    {% for info in targetInfo %}
+                        {% if info.dealer_name == track.dealerr.dealer_name %}
+                            ({{info.target_lat}}, {{info.target_lon}})
+                        {% endif %}
+                    {% endfor %}
+                </strong></div>
+
+                <div class="meta"> Agent Position: <strong>
+                    <span id="current">(Latitude, Longitude)</span>
+                </strong></div>
+        
+                <div class="meta"> Assigned: <span class="status {% if not track.assigned %}false{% endif %}">{{ track.assigned}}</span></div>
+                <div class="meta"> Visited: <span id="statuss">...</span></div>
+                <div class="meta"> Distance: <span id="distt">...</span></div>
+                <div class="date"> Date: {{ track.date|date:"M d, Y - H:i" }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="{% static 'app/track.js' %}"></script>
+</body>
+</html>
